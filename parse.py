@@ -9,9 +9,9 @@ def get_member_test_ids(html_data):
     soup = BeautifulSoup(html_data)
 
     member_id = find_input_val(soup, "osoba")
-    test_id = find_input_val(soup, "prezkouseni")
+    test_uid = find_input_val(soup, "prezkouseni")
 
-    return (member_id, test_id)
+    return (member_id, test_uid)
 
 def get_questions_context(html_data):
     soup = BeautifulSoup(html_data)
