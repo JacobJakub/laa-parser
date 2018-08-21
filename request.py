@@ -1,10 +1,11 @@
 import requests
 
 from parse import get_member_test_ids, get_questions_context
+from session import requests_retry_session
 
 
 def generate_member_test_uids(test_id):
-    html_res = requests.post(
+    html_res = requests_retry_session().post(
         "https://zkouseni.laacr.cz/Zkouseni/index.html?page=volnytest",
         data=dict(test=test_id, ok="OK"),
         allow_redirects=True
@@ -13,7 +14,7 @@ def generate_member_test_uids(test_id):
     return (test_id,) + get_member_test_ids(html_res)
 
 def get_results(test_id, member_id, test_uid):
-    html_res = requests.post(
+    html_res = requests_retry_session().post(
         "https://zkouseni.laacr.cz/Zkouseni/index.html?page=provedtest",
         data=dict(
             test=test_id,
